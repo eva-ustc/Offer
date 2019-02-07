@@ -74,6 +74,13 @@ public class Sub38_StringPermutation {
         }
     }
 
+    /**
+     * 从start下标开始找出m个数字组合
+     * @param chars
+     * @param start
+     * @param m
+     * @param builder
+     */
     private static void combination(char[] chars, int start, int m, StringBuilder builder) {
 
         if (m==0){ // 从剩余的字符串中选出0个,表示已经选出m个,递归结束
@@ -83,9 +90,9 @@ public class Sub38_StringPermutation {
         if (start == chars.length){
             return;
         }
-        builder.append(chars[start]);
+        builder.append(chars[start]); // 组合中包含chars[start]
         combination(chars,start+1,m-1,builder);
-        builder.deleteCharAt(builder.length()-1);
+        builder.deleteCharAt(builder.length()-1); // 组合中不包含chars[start]
         combination(chars,start+1,m,builder);
     }
 

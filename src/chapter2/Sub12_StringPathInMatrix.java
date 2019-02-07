@@ -34,6 +34,18 @@ public class Sub12_StringPathInMatrix {
         return false;
     }
 
+    /**
+     * 回溯法判断矩阵中是否包含某路径
+     * @param matrix 矩阵
+     * @param rows 行数
+     * @param cols 列数
+     * @param str 目标字符串
+     * @param i 当前检查点行坐标
+     * @param j 当前检查点列坐标
+     * @param pathLength 已匹配的路径长度
+     * @param visited 数组标识是否访问过
+     * @return 是否包含匹配字符串的路径
+     */
     private static boolean hasPathCore(char[] matrix, int rows, int cols, char[] str, int i, int j, int pathLength, boolean[] visited) {
 
         if (pathLength == str.length){
@@ -48,7 +60,7 @@ public class Sub12_StringPathInMatrix {
                     ||hasPathCore(matrix,rows,cols,str,i+1,j,pathLength,visited)
                     ||hasPathCore(matrix,rows,cols,str,i,j-1,pathLength,visited)
                     ||hasPathCore(matrix,rows,cols,str,i,j+1,pathLength,visited);
-            if (!hasPath){
+            if (!hasPath){ // 回溯
                 --pathLength;
                 visited[index] = false;
             }
