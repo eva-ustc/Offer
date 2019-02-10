@@ -80,7 +80,6 @@ public class Sub60_PrintProbability {
 
     /**
      * 求出各点数可能出现的次数
-     *
      * @param n           骰子数目
      * @param remain      还剩多少颗骰子
      * @param sum         当前的点数之和

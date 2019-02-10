@@ -21,22 +21,22 @@ public class Sub04_FindInPartialluSortedMatrix {
         int[][] matrix = {{1,2,8,9},{2,4,9,12},{4,7,10,13},{6,8,11,15}};
         find(7,matrix);
     }
-    private static boolean find(int target,int[][] matrix){
+    private static boolean find(int target,int[][] array){
 
         boolean flag = false;
-        if (matrix == null){
+        if (array == null){
             return flag;
         }
-        int rows = matrix.length;
-        int columns = matrix[0].length;
+        int rows = array.length;
+        int columns = array[0].length;
         int row = 0;
         int column = columns-1;
-       while (row < rows && column >0){
-           if (matrix[row][column] == target){
+       while (row < rows && column >=0){
+           if (array[row][column] == target){
                System.out.println("target位置: ["+row+","+column+"]:"+target);
                flag = true;
                break;
-           }else if (matrix[row][column]>target){
+           }else if (array[row][column]>target){
                column--;
            }else {
                row++;
