@@ -48,7 +48,7 @@ public class SortUtil {
      * 快速排序: 每一趟确定基准在最终序列的位置,即左小右大
      * 选择一个关键值作为基准值。比基准值小的都在左边序列（一般是无序的），
      * 比基准值大的都在右边（一般是无序的）。 一般选择序列的第一个元素。
-     * <p>
+     *
      * 平均时间复杂度: O(nlogn) 平均性能最优
      *
      * @param arr
@@ -76,8 +76,8 @@ public class SortUtil {
                 swap(arr, start, end);
             }
         }
+        // 将基准值放到最终位置
         swap(arr, low, start);
-
         // 递归排序左右子序列
         quickSort(arr, low, end - 1);
         quickSort(arr, end + 1, high);
@@ -163,9 +163,9 @@ public class SortUtil {
 
     /**
      * 堆排序
-     * 初始构建堆时间复杂度是 O(n),取出最大值后重建堆的时间复杂度为O(logn)
-     * 整个过程需要取n-1次堆顶并重建,所以总的时间复杂度为 O(nlogn)
-     * 堆排序对原始记录的状态并不敏感,因此它无论是最好、最坏和平均时间复杂度均为O(nlogn)
+     *  初始构建堆时间复杂度是 O(n),取出最大值后重建堆的时间复杂度为O(logn)
+     *  整个过程需要取n-1次堆顶并重建,所以总的时间复杂度为 O(nlogn)
+     *  堆排序对原始记录的状态并不敏感,因此它无论是最好、最坏和平均时间复杂度均为O(nlogn)
      *
      * @param arr
      */
@@ -183,12 +183,12 @@ public class SortUtil {
 
     /**
      * 构建大根堆
-     * 1 从最后一个节点的父节点k开始进行大根堆的构建
-     * 2 保存较大子节点的索引biggerChildIndex
-     * 3 比较父节点k和较大子节点的大小:
-     *      1) 若子节点较大,则交换父子节点,并赋值 k=biggerChildIndex继续子节点的大根堆构建
-     *      (因为交换之后可能破坏原本满足大根堆性质的子节点,使其不再满足大根堆)
-     *      2) 若父节点较大则继续下次循环
+     *  1 从最后一个节点的父节点k开始进行大根堆的构建
+     *  2 保存较大子节点的索引biggerChildIndex
+     *  3 比较父节点k和较大子节点的大小:
+     *       1) 若子节点较大,则交换父子节点,并赋值 k=biggerChildIndex继续子节点的大根堆构建
+     *       (因为交换之后可能破坏原本满足大根堆性质的子节点,使其不再满足大根堆)
+     *       2) 若父节点较大则继续下次循环
      *
      * @param arr
      * @param lastIndex
@@ -198,19 +198,19 @@ public class SortUtil {
         // 从最后一个节点的父节点开始调整堆
         for (int i = (lastIndex - 1) / 2; i >= 0; i--) {
 
-            int k = i; // 正在判断的节点
+            int cur = i; // 正在判断的节点
 
-            while (k * 2 + 1 <= lastIndex) { // 如果当前k节点有子节点
+            while (cur * 2 + 1 <= lastIndex) { // 如果当前k节点有子节点
 
-                int biggerChildIndex = 2 * k + 1; // 左节点索引
+                int biggerChildIndex = 2 * cur + 1; // 左节点索引
                 if (biggerChildIndex < lastIndex) { // 右子节点存在
                     if (arr[biggerChildIndex] < arr[biggerChildIndex + 1]) {
                         biggerChildIndex++; // 记录较大子节点索引
                     }
                 }
-                if (arr[k] < arr[biggerChildIndex]) { // 如果子节点较大
-                    swap(arr, k, biggerChildIndex);
-                    k = biggerChildIndex; // 交换节点位置之后可能破坏子树的大根堆形质,再次进行大根堆构建
+                if (arr[cur] < arr[biggerChildIndex]) { // 如果子节点较大
+                    swap(arr, cur, biggerChildIndex);
+                    cur = biggerChildIndex; // 交换节点位置之后可能破坏子树的大根堆形质,再次进行大根堆构建
                 } else {
                     break;
                 }
@@ -231,7 +231,7 @@ public class SortUtil {
             return;
         }*/
         if (start < end) {// 每个分组的个数大于1个,则继续分组,直到每个组只有一个数字结束递归
-            int middle = (start + end) / 2;
+            int middle = (start + end) >> 1;
             mergeSort(arr, start, middle);
             mergeSort(arr, middle + 1, end);
             merge(arr, start, middle, end);
@@ -262,7 +262,6 @@ public class SortUtil {
         for (int index = left; index <= right; index++) {
             arr[index] = temp[index];
         }
-
     }
 
     /**
@@ -272,7 +271,7 @@ public class SortUtil {
      * @param a
      * @param b
      */
-    private static void swap(int[] numbers, int a, int b) {
+    public static void swap(int[] numbers, int a, int b) {
         int temp = numbers[a];
         numbers[a] = numbers[b];
         numbers[b] = temp;
