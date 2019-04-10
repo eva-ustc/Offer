@@ -19,14 +19,16 @@ public class BigNumUtil {
         StringBuilder numA = new StringBuilder(a).reverse();
         StringBuilder numB = new StringBuilder(b).reverse();
 
-        int len = 0; // 较长
+        // 较长
+        int len = 0;
         // 补0对齐
         if (numA.length() < numB.length()) {
             len = align(numB, numA);
         } else {
             len = align(numA, numB);
         }
-        int high = 0; // 进位
+        // 进位
+        int high = 0;
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < len; i++) {
 
@@ -45,6 +47,12 @@ public class BigNumUtil {
         return result.reverse().toString();
     }
 
+    /**
+     * 补0对齐
+     * @param numA
+     * @param numB
+     * @return
+     */
     private static int align(StringBuilder numA, StringBuilder numB) {
         int len;
         len = numA.length();
@@ -55,18 +63,24 @@ public class BigNumUtil {
         return len;
     }
 
+    /**
+     * 多个大数相加
+     * @param params
+     * @return
+     */
     public static String add(String... params) {
-        int maxLeng = 0;
+        int maxLen = 0;
         //获取最大长度
         for (String s : params) {
-            if (s.length() > maxLeng) maxLeng = s.length();
+            if (s.length() > maxLen) {
+                maxLen = s.length();
+            }
         }
-
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         //进位 数
         int high = 0;
         //将每个待加参数每一位相加 进位
-        for (int i = 0; i < maxLeng; i++) {
+        for (int i = 0; i < maxLen; i++) {
             int charInt = 0;
             for (String s : params) {
                 //高位不够用0代替
@@ -96,6 +110,7 @@ public class BigNumUtil {
      */
     public static String sub(String a, String b) {
 
+        // 翻转
         StringBuilder numA = new StringBuilder(a).reverse();
         StringBuilder numB = new StringBuilder(b).reverse();
 
@@ -103,6 +118,7 @@ public class BigNumUtil {
         int lenA = numA.length();
         int lenB = numB.length();
         int maxLen = lenA;
+        // 判断结果正负
         if (lenA < lenB) {
             maxLen = lenB;
             isPositive = false;
@@ -127,7 +143,8 @@ public class BigNumUtil {
         }
         // 处理借位
         for (int i = 0; i < maxLen; i++) {
-            if (result[i] < 0) { // 负数表示需要借位
+            // 负数表示需要借位
+            if (result[i] < 0) {
                 result[i + 1] -= 1;
                 result[i] += 10;
             }
@@ -139,14 +156,14 @@ public class BigNumUtil {
         // 判断是否有前置0
         boolean flag = true;
         for (int i = maxLen - 1; i >= 0; i--) {
-            if (result[i] == 0 && flag) {
+            if (flag && result[i] == 0 ) {
                 continue;
             } else {
                 flag = false;
             }
             resStr.append(result[i]);
         }
-        if (resStr.toString().equals("")) {
+        if ("".equals(resStr.toString())) {
             resStr.append('0');
         }
         return resStr.toString();
