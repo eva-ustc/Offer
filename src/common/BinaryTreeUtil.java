@@ -1,9 +1,6 @@
 package common;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @author LRK
@@ -198,7 +195,7 @@ public class BinaryTreeUtil {
         queue.offer(root);
         while (!queue.isEmpty()){
             TreeNode temp = queue.poll();
-//            list.add(temp);
+            list.add(temp);
             System.out.print(temp.val+" ");
             if (temp.left!=null){
                 nextLast = temp.left;
@@ -268,6 +265,22 @@ public class BinaryTreeUtil {
             // 构建右子树
             root.right = constructBinaryTreeCore(pre,startPre+len+1,endPre,in,inOrder+1,endIn);
         }
+        return root;
+    }
+
+    public static TreeNode getBST(int[] nums){
+
+        Arrays.sort(nums);
+        return getBSTHelper(nums,0,nums.length-1);
+    }
+
+    private static TreeNode getBSTHelper(int[] nums, int left, int right) {
+
+        if (right<left){return null;}
+        int mid = (left+right)>>1;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = getBSTHelper(nums,left,mid-1);
+        root.right = getBSTHelper(nums,mid+1,right);
         return root;
     }
 
