@@ -1,5 +1,7 @@
 package sword2offer.chapter2;
 
+import java.util.Scanner;
+
 /**
  * @author LRK
  * @project_name Offer
@@ -22,12 +24,36 @@ package sword2offer.chapter2;
 public class Sub12_StringPathInMatrix {
 
     public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        while (in.hasNextInt()) {
+            int n = in.nextInt();
+            int m = in.nextInt();
+            int q = in.nextInt();
+            char[] matrix = new char[n * m];
+            for (int i = 0; i < n; i++) {
+                char[] tmp = in.next().toCharArray();
+                for (int j = 0; j < m; j++) {
+                    matrix[i * m + j] = tmp[j];
+                }
+            }
 
-        char[] matrix = "abtgcfcsjdeh".toCharArray();
+            for (int i = 0; i < q; i++) {
+                char[] target = in.next().toCharArray();
+                boolean b = hasPath(matrix, n, m, target);
+                if (b) {
+                    System.out.println("Case " + i + ": Has");
+                } else {
+                    System.out.println("Case " + i + ": Not Has");
+                }
+            }
+
+        }
+    }
+        /*char[] matrix = "abtgcfcsjdeh".toCharArray();
         char[] str = "bfce".toCharArray();
         boolean hasPath = hasPath(matrix,3,4,str);
-        System.out.println(hasPath);
-    }
+        System.out.println(hasPath);*/
+
     public static boolean hasPath(char[] matrix, int rows, int cols, char[] target)
     {
         if (matrix==null || rows<1||cols<1||target==null){
@@ -82,6 +108,4 @@ public class Sub12_StringPathInMatrix {
         }
         return hasPath;
     }
-
-
 }

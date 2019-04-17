@@ -1,7 +1,6 @@
 package sword2offer.chapter4;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,7 +14,7 @@ import java.util.Set;
  */
 public class Sub38_StringPermutation {
     public static void main(String[] args) {
-        System.out.println("123的排列: "+Permutation("123"));
+        System.out.println("123的排列: "+ permutation("123"));
         System.out.println("abc的组合:");
         combination("abc");
     }
@@ -25,10 +24,12 @@ public class Sub38_StringPermutation {
      * @param str
      * @return
      */
-    public static ArrayList<String> Permutation(String str) {
+    public static ArrayList<String> permutation(String str) {
 
         ArrayList<String> list = new ArrayList<>();
-        if (str == null || str.length() <= 0) return list;
+        if (str == null || str.length() <= 0) {
+            return list;
+        }
 
         char[] chars = str.toCharArray();
         permutation(chars, 0, list);
@@ -36,24 +37,24 @@ public class Sub38_StringPermutation {
         return list;
     }
 
-    private static void permutation(char[] chars, int index, ArrayList<String> list) {
+    private static void permutation(char[] chars, int begin, ArrayList<String> list) {
 
-        if (index == chars.length - 1) {
+        if (begin == chars.length - 1) {
             // 得到一个排列
             list.add(new String(chars));
             return;
         }
         Set<Character> set = new HashSet<>();
-        for (int i = index; i < chars.length; i++) {
+        for (int i = begin; i < chars.length; i++) {
 
             if (!set.contains(chars[i])) {
                 set.add(chars[i]);
                 // 固定index字符
-                swap(chars, i, index);
+                swap(chars, i, begin);
                 // 递归固定剩余字符
-                permutation(chars, index + 1, list);
+                permutation(chars, begin + 1, list);
                 // 恢复原数组
-                swap(chars, i, index);
+                swap(chars, i, begin);
             }
         }
     }
@@ -64,7 +65,9 @@ public class Sub38_StringPermutation {
      * @return
      */
     public static void combination(String str){
-        if (str==null || str.length()==0) return;
+        if (str==null || str.length()==0) {
+            return;
+        }
 
         StringBuilder builder = new StringBuilder();
         char[] chars = str.toCharArray();
@@ -83,16 +86,19 @@ public class Sub38_StringPermutation {
      */
     private static void combination(char[] chars, int start, int m, StringBuilder builder) {
 
-        if (m==0){ // 从剩余的字符串中选出0个,表示已经选出m个,递归结束
+        // 从剩余的字符串中选出0个,表示已经选出m个,递归结束
+        if (m==0){
             System.out.println(builder.toString());
             return;
         }
         if (start == chars.length){
             return;
         }
-        builder.append(chars[start]); // 组合中包含chars[start]
+        // 组合中包含chars[start]
+        builder.append(chars[start]);
         combination(chars,start+1,m-1,builder);
-        builder.deleteCharAt(builder.length()-1); // 组合中不包含chars[start]
+        // 组合中不包含chars[start]
+        builder.deleteCharAt(builder.length()-1);
         combination(chars,start+1,m,builder);
     }
 

@@ -1,4 +1,4 @@
-package pinduoduo;
+package nowcoder.pinduoduo;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * @author LRK
  * @project_name Offer
- * @package_name pinduoduo
+ * @package_name nowcoder.pinduoduo
  * @date 2019/4/3 19:51
  * @description God Bless, No Bug!
  */
